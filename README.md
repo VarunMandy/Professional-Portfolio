@@ -7,7 +7,7 @@ Personal portfolio of **Varun Mandepudi**, M.S. Data Science student at Northeas
 A single self-contained `index.html` (inline CSS and JavaScript, no build step):
 
 - Light and dark themes that follow the system setting, plus a toggle
-- Expandable experience timeline, project detail modals and skill-usage highlighting
+- Expandable experience timeline and project detail modals
 - Command palette (<kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>K</kbd>) and a one-screen Recruiter Quick View
 - Responsive, keyboard accessible, and respects `prefers-reduced-motion`
 

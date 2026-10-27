@@ -554,13 +554,6 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 .tl-foot { padding: 0 var(--s-3) var(--s-3); }
 .hl { color: var(--c-highlight-text); font-weight: 600; }
 
-/* Skill → usage highlighting */
-.is-related .tl-card, .project-card.is-related, .pub-card.is-related {
-  border-color: var(--c-accent);
-  box-shadow: 0 0 0 3px var(--c-accent-soft), var(--shadow-md);
-}
-.is-related .tl-marker { background: var(--c-accent); }
-
 /* ============================================================
    Projects
    ============================================================ */
@@ -611,10 +604,9 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 /* ============================================================
    Skills
    ============================================================ */
-.skills-layout { display: grid; gap: var(--s-3); }
-@media (min-width: 960px) { .skills-layout { grid-template-columns: 1fr 340px; gap: var(--s-4); align-items: start; } }
 .skill-groups { display: grid; gap: var(--s-3); }
 @media (min-width: 700px) { .skill-groups { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .skill-groups { grid-template-columns: repeat(3, 1fr); } }
 .skill-group {
   background: var(--c-bg); border: 1px solid var(--c-border); border-radius: var(--radius); padding: var(--s-3);
 }
@@ -622,38 +614,10 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 .skill-group h3 .icon { color: var(--c-accent-text); }
 .chips { list-style: none; display: flex; flex-wrap: wrap; gap: var(--s-1); }
 .chip {
-  position: relative; display: inline-flex; align-items: center; gap: 6px;
-  min-height: 36px; padding: 6px 12px; border-radius: 999px; cursor: pointer;
+  display: inline-flex; align-items: center; min-height: 36px; padding: 6px 12px; border-radius: 999px;
   background: var(--c-surface); border: 1px solid var(--c-border-strong);
   font-size: 0.875rem; font-weight: 500; color: var(--c-text-2);
-  transition: transform 200ms var(--ease-out), background-color 200ms, border-color 200ms, color 200ms;
 }
-.chip[data-used]::after {
-  content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--c-accent);
-}
-.chip:hover, .chip.is-active { border-color: var(--c-accent); color: var(--c-accent-text); transform: translateY(-2px); }
-.chip[aria-pressed="true"] { background: var(--c-accent); border-color: var(--c-accent); color: var(--navy); }
-.chip[aria-pressed="true"]::after { background: var(--navy); }
-.skill-panel {
-  background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius);
-  padding: var(--s-3); box-shadow: var(--shadow-lg);
-  position: sticky; bottom: var(--s-2); z-index: 5;
-}
-@media (min-width: 960px) { .skill-panel { top: calc(var(--header-h) + var(--s-3)); bottom: auto; box-shadow: var(--shadow-md); } }
-.skill-panel-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-muted); }
-.skill-panel-title { margin-top: 4px; font-family: var(--font-head); font-size: 1.25rem; font-weight: 600; }
-.skill-panel-body { margin-top: var(--s-1); color: var(--c-text-2); font-size: 0.9375rem; }
-.skill-panel ul { list-style: none; display: grid; gap: 6px; margin-top: 12px; }
-.skill-panel li a {
-  display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 10px;
-  background: var(--c-accent-soft); color: var(--c-text); text-decoration: none; font-size: 0.9rem; font-weight: 500;
-}
-.skill-panel li a:hover { color: var(--c-accent-text); }
-.skill-panel li .icon { width: 16px; height: 16px; color: var(--c-accent-text); }
-.skill-legend { margin-top: var(--s-2); display: flex; align-items: center; gap: 8px; font-size: 0.8125rem; color: var(--c-muted); }
-.skill-legend i { width: 6px; height: 6px; border-radius: 50%; background: var(--c-accent); display: inline-block; }
-@media (max-width: 959px) { .skill-panel-hint-desktop { display: none; } }
-@media (min-width: 960px) { .skill-panel-hint-touch { display: none; } }
 
 /* ============================================================
    Education & publications
@@ -846,11 +810,11 @@ dialog[open]::backdrop { animation: fadeIn 300ms var(--ease-out); }
   html.js .reveal { opacity: 1; transform: none; }
   .hero-mesh { animation: none; }
   .caret { display: none; }
-  .project-card:hover, .project-card:focus-within, .edu-card:hover, .pub-card:hover, .chip:hover, .chip.is-active { transform: none; --lift: 0px; }
+  .project-card:hover, .project-card:focus-within, .edu-card:hover, .pub-card:hover { transform: none; --lift: 0px; }
 }
 
 @media print {
-  .site-header, .progress, .hero-bg, .hero-scroll, .toast, .skill-panel, .cursor-ring, .cursor-dot { display: none !important; }
+  .site-header, .progress, .hero-bg, .hero-scroll, .toast, .cursor-ring, .cursor-dot { display: none !important; }
   html.js .reveal { opacity: 1; transform: none; }
   .tl-body[hidden] { display: block !important; }
 }
@@ -1044,7 +1008,7 @@ dialog[open]::backdrop { animation: fadeIn 300ms var(--ease-out); }
       </div>
 
       <ol class="timeline">
-        <li class="tl-item reveal" id="exp-saint-gobain" data-skills="python vertex" data-label="Saint-Gobain India">
+        <li class="tl-item reveal" id="exp-saint-gobain">
           <span class="tl-marker" aria-hidden="true"></span>
           <article class="tl-card">
             <h3 class="tl-heading">
@@ -1071,7 +1035,7 @@ dialog[open]::backdrop { animation: fadeIn 300ms var(--ease-out); }
           </article>
         </li>
 
-        <li class="tl-item reveal" id="exp-fragiliti" data-skills="python forecasting stats" data-label="Fragiliti Narratives">
+        <li class="tl-item reveal" id="exp-fragiliti">
           <span class="tl-marker" aria-hidden="true"></span>
           <article class="tl-card">
             <h3 class="tl-heading">
@@ -1098,7 +1062,7 @@ dialog[open]::backdrop { animation: fadeIn 300ms var(--ease-out); }
           </article>
         </li>
 
-        <li class="tl-item reveal" id="exp-srm" data-skills="dl cnn eval forecasting" data-label="SRM University (research)">
+        <li class="tl-item reveal" id="exp-srm">
           <span class="tl-marker" aria-hidden="true"></span>
           <article class="tl-card">
             <h3 class="tl-heading">
@@ -1125,7 +1089,7 @@ dialog[open]::backdrop { animation: fadeIn 300ms var(--ease-out); }
           </article>
         </li>
 
-        <li class="tl-item reveal" id="exp-thaai" data-skills="python cleaning powerbi" data-label="Thaai Casting Limited">
+        <li class="tl-item reveal" id="exp-thaai">
           <span class="tl-marker" aria-hidden="true"></span>
           <article class="tl-card">
             <h3 class="tl-heading">
@@ -1164,7 +1128,7 @@ dialog[open]::backdrop { animation: fadeIn 300ms var(--ease-out); }
       </div>
       <div class="projects-grid" data-stagger>
         <div class="project-wrap reveal">
-          <article class="project-card" id="proj-rag" data-skills="python postgres faiss flask rag nlp" data-label="RAG Chatbot for Research Papers">
+          <article class="project-card" id="proj-rag">
             <span class="project-icon" aria-hidden="true"><svg class="icon"><use href="#i-db"/></svg></span>
             <h3>RAG Chatbot for Research Papers</h3>
             <p>Semantic search and retrieval-augmented generation over 547,000+ arXiv papers. Answers come back with cited source papers.</p>
@@ -1190,7 +1154,7 @@ dialog[open]::backdrop { animation: fadeIn 300ms var(--ease-out); }
         </div>
 
         <div class="project-wrap reveal">
-          <article class="project-card" id="proj-lecture" data-skills="python pytorch transformers xattn dl nlp eval" data-label="Smart Lecture Classifier">
+          <article class="project-card" id="proj-lecture">
             <span class="project-icon" aria-hidden="true"><svg class="icon"><use href="#i-layers"/></svg></span>
             <h3>Smart Lecture Classifier</h3>
             <p>Multimodal classifier that sorts lecture segments into 4 teaching categories, fusing ViT-B/16 vision and BERT text features with cross-attention.</p>
@@ -1223,86 +1187,74 @@ dialog[open]::backdrop { animation: fadeIn 300ms var(--ease-out); }
       <div class="section-head reveal">
         <span class="eyebrow">Skills</span>
         <h2 id="skills-title" tabindex="-1">Technical toolkit</h2>
-        <p>Skills marked with a dot appear in my experience or projects. Hover or tap one to see where I used it.</p>
       </div>
-      <div class="skills-layout">
-        <div class="skill-groups" data-stagger>
+      <div class="skill-groups" data-stagger>
           <div class="skill-group reveal">
             <h3><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>Languages &amp; Tools</h3>
             <ul class="chips">
-              <li><button class="chip" type="button" data-skill="python">Python</button></li>
-              <li><button class="chip" type="button" data-skill="pytorch">PyTorch</button></li>
-              <li><button class="chip" type="button" data-skill="sklearn">Scikit-Learn</button></li>
-              <li><button class="chip" type="button" data-skill="pandas">Pandas</button></li>
-              <li><button class="chip" type="button" data-skill="numpy">NumPy</button></li>
-              <li><button class="chip" type="button" data-skill="r">R</button></li>
-              <li><button class="chip" type="button" data-skill="sql">SQL</button></li>
-              <li><button class="chip" type="button" data-skill="bash">Bash</button></li>
-              <li><button class="chip" type="button" data-skill="git">Git/GitHub</button></li>
-              <li><button class="chip" type="button" data-skill="jupyter">Jupyter Notebooks</button></li>
+              <li class="chip">Python</li>
+              <li class="chip">PyTorch</li>
+              <li class="chip">Scikit-Learn</li>
+              <li class="chip">Pandas</li>
+              <li class="chip">NumPy</li>
+              <li class="chip">R</li>
+              <li class="chip">SQL</li>
+              <li class="chip">Bash</li>
+              <li class="chip">Git/GitHub</li>
+              <li class="chip">Jupyter Notebooks</li>
             </ul>
           </div>
           <div class="skill-group reveal">
             <h3><svg class="icon" aria-hidden="true"><use href="#i-brain"/></svg>AI / Machine Learning</h3>
             <ul class="chips">
-              <li><button class="chip" type="button" data-skill="dl">Deep Learning</button></li>
-              <li><button class="chip" type="button" data-skill="cnn">CNNs</button></li>
-              <li><button class="chip" type="button" data-skill="lstm">LSTMs</button></li>
-              <li><button class="chip" type="button" data-skill="transformers">Transformers</button></li>
-              <li><button class="chip" type="button" data-skill="nlp">NLP</button></li>
-              <li><button class="chip" type="button" data-skill="rag">RAG Pipelines</button></li>
-              <li><button class="chip" type="button" data-skill="eval">Model Evaluation</button></li>
-              <li><button class="chip" type="button" data-skill="cleaning">Data Cleaning</button></li>
-              <li><button class="chip" type="button" data-skill="xattn">Cross-Attention</button></li>
+              <li class="chip">Deep Learning</li>
+              <li class="chip">CNNs</li>
+              <li class="chip">LSTMs</li>
+              <li class="chip">Transformers</li>
+              <li class="chip">NLP</li>
+              <li class="chip">RAG Pipelines</li>
+              <li class="chip">Model Evaluation</li>
+              <li class="chip">Data Cleaning</li>
+              <li class="chip">Cross-Attention</li>
             </ul>
           </div>
           <div class="skill-group reveal">
             <h3><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg>Analytics</h3>
             <ul class="chips">
-              <li><button class="chip" type="button" data-skill="stats">Statistical Analysis</button></li>
-              <li><button class="chip" type="button" data-skill="ab">A/B Testing</button></li>
-              <li><button class="chip" type="button" data-skill="regression">Regression</button></li>
-              <li><button class="chip" type="button" data-skill="eda">EDA</button></li>
-              <li><button class="chip" type="button" data-skill="forecasting">Forecasting</button></li>
-              <li><button class="chip" type="button" data-skill="timeseries">Time-Series Analysis</button></li>
-              <li><button class="chip" type="button" data-skill="fe">Feature Engineering</button></li>
+              <li class="chip">Statistical Analysis</li>
+              <li class="chip">A/B Testing</li>
+              <li class="chip">Regression</li>
+              <li class="chip">EDA</li>
+              <li class="chip">Forecasting</li>
+              <li class="chip">Time-Series Analysis</li>
+              <li class="chip">Feature Engineering</li>
             </ul>
           </div>
           <div class="skill-group reveal">
             <h3><svg class="icon" aria-hidden="true"><use href="#i-cloud"/></svg>Cloud &amp; Data</h3>
             <ul class="chips">
-              <li><button class="chip" type="button" data-skill="vertex">Google Cloud (Vertex AI)</button></li>
-              <li><button class="chip" type="button" data-skill="databricks">Azure Databricks</button></li>
-              <li><button class="chip" type="button" data-skill="pyspark">PySpark</button></li>
-              <li><button class="chip" type="button" data-skill="postgres">PostgreSQL</button></li>
-              <li><button class="chip" type="button" data-skill="mysql">MySQL</button></li>
-              <li><button class="chip" type="button" data-skill="faiss">FAISS</button></li>
-              <li><button class="chip" type="button" data-skill="flask">Flask APIs</button></li>
+              <li class="chip">Google Cloud (Vertex AI)</li>
+              <li class="chip">Azure Databricks</li>
+              <li class="chip">PySpark</li>
+              <li class="chip">PostgreSQL</li>
+              <li class="chip">MySQL</li>
+              <li class="chip">FAISS</li>
+              <li class="chip">Flask APIs</li>
             </ul>
           </div>
           <div class="skill-group reveal">
             <h3><svg class="icon" aria-hidden="true"><use href="#i-bars"/></svg>Visualization</h3>
             <ul class="chips">
-              <li><button class="chip" type="button" data-skill="powerbi">Power BI</button></li>
-              <li><button class="chip" type="button" data-skill="tableau">Tableau</button></li>
-              <li><button class="chip" type="button" data-skill="excel">Excel</button></li>
-              <li><button class="chip" type="button" data-skill="ggplot2">ggplot2</button></li>
-              <li><button class="chip" type="button" data-skill="matplotlib">Matplotlib</button></li>
-              <li><button class="chip" type="button" data-skill="seaborn">Seaborn</button></li>
+              <li class="chip">Power BI</li>
+              <li class="chip">Tableau</li>
+              <li class="chip">Excel</li>
+              <li class="chip">ggplot2</li>
+              <li class="chip">Matplotlib</li>
+              <li class="chip">Seaborn</li>
             </ul>
           </div>
         </div>
 
-        <aside class="skill-panel" id="skill-panel" aria-live="polite">
-          <p class="skill-panel-label">Skill usage</p>
-          <p class="skill-panel-title" id="skill-panel-title">Explore my toolkit</p>
-          <div class="skill-panel-body" id="skill-panel-body">
-            <p class="skill-panel-hint-desktop">Hover a skill to highlight the roles and projects that used it. Click to pin it.</p>
-            <p class="skill-panel-hint-touch">Tap a skill to see where I used it.</p>
-          </div>
-          <p class="skill-legend"><i aria-hidden="true"></i> Used in experience or projects</p>
-        </aside>
-      </div>
     </div>
   </section>
 
@@ -1356,7 +1308,7 @@ dialog[open]::backdrop { animation: fadeIn 300ms var(--ease-out); }
       </div>
       <div class="pub-grid" data-stagger>
         <div class="reveal">
-          <article class="pub-card" id="pub-waste" data-skills="dl cnn eval" data-label="Waste classification paper">
+          <article class="pub-card" id="pub-waste">
             <div class="pub-venue"><b>ICRDICCT’25</b><span>Accepted &amp; presented · Apr 2025</span></div>
             <h3>Waste Classification Using ML Models: A Comparative Study</h3>
             <p>Benchmarked CNN, ResNet, and classical ML architectures for automated image-based waste classification.</p>
@@ -1366,7 +1318,7 @@ dialog[open]::backdrop { animation: fadeIn 300ms var(--ease-out); }
           </article>
         </div>
         <div class="reveal">
-          <article class="pub-card" id="pub-grid" data-skills="dl forecasting" data-label="Smart grids paper">
+          <article class="pub-card" id="pub-grid">
             <div class="pub-venue"><b>Com-IT-Con 2024</b><span>Published · Oct 2024</span></div>
             <h3>Transformative Potential of AI and ML in the Energy Sector: Smart Grids</h3>
             <p>Proposed ensemble deep learning approaches for smart grid optimization and energy demand forecasting.</p>
@@ -1908,63 +1860,6 @@ dialog[open]::backdrop { animation: fadeIn 300ms var(--ease-out); }
     }
   });
 
-  /* ---------------- Skill → usage highlighting ---------------- */
-  const usageItems = $$('[data-skills]');
-  const itemIcon = (el) => el.classList.contains('tl-item') ? 'i-briefcase' : el.classList.contains('pub-card') ? 'i-doc' : 'i-layers';
-  const usage = {};
-  usageItems.forEach(el => el.dataset.skills.split(/\s+/).forEach(s => { (usage[s] = usage[s] || []).push(el); }));
-  const chips = $$('.chip');
-  chips.forEach(c => { if (usage[c.dataset.skill]) c.setAttribute('data-used', ''); c.setAttribute('aria-pressed', 'false'); });
-  const panelTitle = $('#skill-panel-title');
-  const panelBody = $('#skill-panel-body');
-  const defaultTitle = panelTitle.textContent;
-  const defaultBody = panelBody.innerHTML;
-  let pinned = null;
-  let clearTimer;
-
-  function showSkill(chip) {
-    clearTimeout(clearTimer);
-    const skill = chip.dataset.skill;
-    const used = usage[skill] || [];
-    chips.forEach(c => c.classList.toggle('is-active', c === chip));
-    usageItems.forEach(el => el.classList.toggle('is-related', used.includes(el)));
-    panelTitle.textContent = chip.textContent;
-    if (used.length) {
-      panelBody.innerHTML = `<p>Used in ${used.length} ${used.length === 1 ? 'place' : 'places'}:</p><ul>` +
-        used.map(el => `<li><a href="#${el.id}">${svgUse(itemIcon(el))}${escapeHtml(el.dataset.label)}</a></li>`).join('') + '</ul>';
-    } else {
-      panelBody.innerHTML = '<p>Listed in my technical skills. Not tied to a specific role or project on my resume.</p>';
-    }
-  }
-  function clearSkill() {
-    chips.forEach(c => c.classList.remove('is-active'));
-    usageItems.forEach(el => el.classList.remove('is-related'));
-    panelTitle.textContent = defaultTitle;
-    panelBody.innerHTML = defaultBody;
-  }
-  function restore() {
-    clearTimer = setTimeout(() => { pinned ? showSkill(pinned) : clearSkill(); }, 120);
-  }
-  chips.forEach(chip => {
-    chip.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') showSkill(chip); });
-    chip.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') restore(); });
-    chip.addEventListener('focus', () => showSkill(chip));
-    chip.addEventListener('blur', restore);
-    chip.addEventListener('click', () => {
-      const wasPinned = pinned === chip;
-      chips.forEach(c => c.setAttribute('aria-pressed', 'false'));
-      pinned = wasPinned ? null : chip;
-      if (pinned) { chip.setAttribute('aria-pressed', 'true'); showSkill(chip); } else { clearSkill(); }
-    });
-  });
-  // Opening a highlighted role from the panel should also expand it.
-  panelBody.addEventListener('click', (e) => {
-    const a = e.target.closest('a[href^="#exp-"]');
-    if (!a) return;
-    const btn = $(`${a.getAttribute('href')} .tl-toggle`);
-    if (btn) setExpanded(btn, true);
-  });
-
   /* ---------------- Micro-interactions ---------------- */
   // Ripple
   document.addEventListener('pointerdown', (e) => {
@@ -2028,7 +1923,7 @@ dialog[open]::backdrop { animation: fadeIn 300ms var(--ease-out); }
         dot.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
         document.body.classList.add('has-cursor');
         if (!rafId) rafId = requestAnimationFrame(loop);
-        ring.classList.toggle('is-hover', !!e.target.closest('a, button, [role="option"], input, .chip'));
+        ring.classList.toggle('is-hover', !!e.target.closest('a, button, [role="option"], input'));
       }, { passive: true });
       document.addEventListener('pointerleave', () => document.body.classList.remove('has-cursor'));
       document.documentElement.addEventListener('mouseleave', () => document.body.classList.remove('has-cursor'));
